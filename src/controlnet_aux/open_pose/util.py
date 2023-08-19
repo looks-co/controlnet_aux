@@ -18,7 +18,7 @@ def smart_resize(x, s):
         Ho, Wo, Co = x.shape
     if Co == 3 or Co == 1:
         k = float(Ht + Wt) / float(Ho + Wo)
-        return cv2.resize(x, (int(Wt), int(Ht)), interpolation=cv2.INTER_AREA if k < 1 else cv2.INTER_LANCZOS4)
+        return cv2.resize(x.astype(np.float32), (int(Wt), int(Ht)), interpolation=cv2.INTER_AREA if k < 1 else cv2.INTER_CUBIC)
     else:
         return np.stack([smart_resize(x[:, :, i], s) for i in range(Co)], axis=2)
 
@@ -32,7 +32,7 @@ def smart_resize_k(x, fx, fy):
     Ht, Wt = Ho * fy, Wo * fx
     if Co == 3 or Co == 1:
         k = float(Ht + Wt) / float(Ho + Wo)
-        return cv2.resize(x, (int(Wt), int(Ht)), interpolation=cv2.INTER_AREA if k < 1 else cv2.INTER_LANCZOS4)
+        return cv2.resize(x.astype(np.float32), (int(Wt), int(Ht)), interpolation=cv2.INTER_AREA if k < 1 else cv2.INTER_CUBIC)
     else:
         return np.stack([smart_resize_k(x[:, :, i], fx, fy) for i in range(Co)], axis=2)
 
