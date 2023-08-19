@@ -82,7 +82,7 @@ _deps = [
     "numpy",
     "filelock",
     "importlib_metadata",
-    "opencv-python-headless",
+    "opencv-python",
     "matplotlib",
     "scipy",
     "huggingface_hub",
